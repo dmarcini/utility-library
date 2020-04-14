@@ -1,3 +1,9 @@
+.vscode
+bin
+
+Makefile
+src/main.cpp
+
 # Prerequisites
 *.d
 
