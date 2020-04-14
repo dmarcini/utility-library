@@ -10,7 +10,9 @@ namespace utility {
 Scanner::Scanner(std::istream &istream, const std::string &delimiters)
     : istream_(istream)
 {
-
+    if (!delimiters.empty()) {
+        set_delimiters(delimiters);
+    }
 }
 
 
@@ -31,6 +33,67 @@ void Scanner::clear()
 void Scanner::reset()
 {
     skip_pattern_ = std::nullopt;
+
+    reset_delimiters();
+}
+
+
+void Scanner::set_delimiters(const std::string &delimiters)
+{
+    if (!delimiters.empty()) {
+        istream_.imbue(std::locale(istream_.getloc(),
+                       new Delimiters(delimiters, Delimiters::Option::Set)));
+    }
+}
+
+
+void Scanner::set_delimiters(char delimiter)
+{
+    set_delimiters(std::string(1, delimiter));
+}
+
+
+void Scanner::append_delimiters(const std::string &delimiters)
+{
+    if (!delimiters.empty()) {
+        istream_.imbue(std::locale(istream_.getloc(),
+                       new Delimiters(delimiters, Delimiters::Option::Append)));
+    }
+}
+
+
+void Scanner::append_delimiters(char delimiter)
+{
+    append_delimiters(std::string(1, delimiter));
+}
+
+
+void Scanner::remove_delimiters(const std::string &delimiters)
+{
+    if (!delimiters.empty()) {
+        istream_.imbue(std::locale(istream_.getloc(),
+                       new Delimiters(delimiters, Delimiters::Option::Remove)));
+    }
+
+}
+
+
+void Scanner::remove_delimiters(char delimiter)
+{
+    remove_delimiters(std::string(1, delimiter));
+}
+
+
+void Scanner::reset_delimiters()
+{
+    istream_.imbue(std::locale(istream_.getloc(),
+                   new Delimiters("", Delimiters::Option::Reset)));
+}
+
+
+std::string Scanner::get_delimiters() const
+{
+    return Delimiters::get_delimiters();
 }
 
 
