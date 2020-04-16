@@ -23,25 +23,25 @@ std::vector<mask> Scanner::Delimiters::locale_table_(classic_table_,
 std::vector<mask> Scanner::Delimiters::default_table_(locale_table_);
 
 
-Scanner::Delimiters::Delimiters(const std::string &delimiters, Option option,
-                                std::size_t refs)
-    : ctype(make_table(delimiters, option), false, refs) {}
+Scanner::Delimiters::Delimiters(const std::string &delimiters,
+                                Operation operation, std::size_t refs)
+    : ctype(make_table(delimiters, operation), false, refs) {}
 
 
 mask* Scanner::Delimiters::make_table(const std::string &delimiters,
-                                      Option option)
+                                      Operation operation)
 {
-    switch (option) {
-        case Option::Set:
+    switch (operation) {
+        case Operation::Set:
             set_delimiters(delimiters);
             break;
-        case Option::Append:
+        case Operation::Append:
             append_delimiters(delimiters);
             break;
-        case Option::Remove:
+        case Operation::Remove:
             remove_delimiters(delimiters);
             break;
-        case Option::Reset:
+        case Operation::Reset:
             reset_delimiters();
             break;
     }

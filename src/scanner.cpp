@@ -42,7 +42,7 @@ void Scanner::set_delimiters(const std::string &delimiters)
 {
     if (!delimiters.empty()) {
         istream_.imbue(std::locale(istream_.getloc(),
-                       new Delimiters(delimiters, Delimiters::Option::Set)));
+                       new Delimiters(delimiters, Delimiters::Operation::Set)));
     }
 }
 
@@ -57,7 +57,8 @@ void Scanner::append_delimiters(const std::string &delimiters)
 {
     if (!delimiters.empty()) {
         istream_.imbue(std::locale(istream_.getloc(),
-                       new Delimiters(delimiters, Delimiters::Option::Append)));
+                       new Delimiters(delimiters,
+                                      Delimiters::Operation::Append)));
     }
 }
 
@@ -72,7 +73,8 @@ void Scanner::remove_delimiters(const std::string &delimiters)
 {
     if (!delimiters.empty()) {
         istream_.imbue(std::locale(istream_.getloc(),
-                       new Delimiters(delimiters, Delimiters::Option::Remove)));
+                       new Delimiters(delimiters,
+                                      Delimiters::Operation::Remove)));
     }
 
 }
@@ -87,7 +89,7 @@ void Scanner::remove_delimiters(char delimiter)
 void Scanner::reset_delimiters()
 {
     istream_.imbue(std::locale(istream_.getloc(),
-                   new Delimiters("", Delimiters::Option::Reset)));
+                   new Delimiters("", Delimiters::Operation::Reset)));
 }
 
 

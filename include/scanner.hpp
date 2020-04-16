@@ -62,7 +62,7 @@ public:
 private:
     struct Delimiters : std::ctype<char> {
     public:
-        enum class Option
+        enum class Operation
         {
             Set,
             Append,
@@ -70,11 +70,11 @@ private:
             Reset
         };
 
-        Delimiters(const std::string &delimiters, Option option,
+        Delimiters(const std::string &delimiters, Operation operation,
                    std::size_t refs = 0);
 
         static mask* make_table(const std::string &delimiters,
-                                Option option);
+                                Operation operation);
 
         static void set_delimiters(const std::string &delimiters);
         static void append_delimiters(const std::string &delimiters);
@@ -104,4 +104,4 @@ private:
 
 } // namespace utility;
 
-#endif // SCANNER_HPP_2222222
+#endif // SCANNER_HPP_
