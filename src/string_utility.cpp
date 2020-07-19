@@ -1,6 +1,7 @@
 #include "string_utility.hpp"
 
 #include <algorithm>
+#include <regex>
 
 
 namespace utility {
@@ -27,19 +28,36 @@ void remove_chars(std::string &src, const std::string &chars_to_remove)
 
 bool contains(const std::string &src, const char c)
 {
-    return contains(src, std::string(1, c));
+    return src.find(c) != std::string::npos;
 }
 
 
-bool contains(const std::string &src, const char *str)
+bool contains(const std::string &src, const char *regex)
 {
-    return contains(src, std::string(str));
+    return contains(src, std::string(regex));
 }
 
 
-bool contains(const std::string &src, const std::string &str)
+bool contains(const std::string &src, const std::string &regex)
 {
-    return src.find(str) != std::string::npos;
+    std::regex r(regex);
+    std::smatch sm;
+
+    if (std::regex_search(src, sm, r)) {
+        return true;
+    }
+
+    return false;
+}
+
+
+std::string getline(std::istream &is)
+{
+    std::string line {};
+
+    std::getline(is, line);
+
+    return line;
 }
 
 }; //namespace utility

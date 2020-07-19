@@ -14,8 +14,10 @@ void remove_chars(std::string &src, const char *chars_to_remove);
 void remove_chars(std::string &src, const std::string &chars_to_remove);
 
 bool contains(const std::string &src, char c);
-bool contains(const std::string &src, const char *str);
-bool contains(const std::string &src, const std::string &str);
+bool contains(const std::string &src, const char *regex);
+bool contains(const std::string &src, const std::string &regex);
+
+std::string getline(std::istream &is);
 
 template<typename T>
 std::string to_string(T &value);
