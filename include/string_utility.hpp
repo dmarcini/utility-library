@@ -1,4 +1,4 @@
-#ifndef STRING_UTILITY__HPP_
+#ifndef STRING_UTILITY_HPP_
 #define STRING_UTILITY_HPP_
 
 #include <string>
